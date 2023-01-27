@@ -34,11 +34,7 @@ public class Odstredovani {
 
     public static void stavovy_automat () {
         switch (stav){
-            case IDLE: {
-                stav_0();
-
-                break;
-            }
+            case IDLE:                      {stav_0();break;}
             case START:                     {stav_1();break;}
             case MEZI_TOCENIM1:             {stav_2();break;}
             case MEZI_TOCENIM2:             {stav_3();break;}
@@ -152,7 +148,6 @@ public class Odstredovani {
                 // dvere jsou zavrene
                 case 'S': {
                     PU_start = true;
-//                    vypisStav(vypis);
                     System.out.println("Stiskli jsme start.");
                     break;
                 }
@@ -160,12 +155,9 @@ public class Odstredovani {
                 case 'Z': {
                     if (zavrene_dvere == false) {
                         zavrene_dvere = true;
-                        vypis = "Dvere jsme prave zavreli.";
                         System.out.println("Dvere jsme prave zavreli.");
                     } else {
                         zavrene_dvere = false;
-                        vypis = "Dvere jsme prave otevreli.";
-//                        vypisStav(vypis);
                         System.out.println("Dvere jsme prave otevreli.");
                     }
                     break;

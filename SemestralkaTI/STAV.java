@@ -2,7 +2,6 @@ package SemestralkaTI;
 
 public enum STAV {
 	IDLE,
-	DEFAULT,
 	START,
 	NAPOUSTENI_VODY,
 	OHRIVANI_VODY,
@@ -11,6 +10,4 @@ public enum STAV {
 	VYPOUSTENI_VODY,
 	UKONCENI_VYPOUSTENI_VODY,
 	PRED_DALSIM_CYKLEM,
-	KONEC,
-	CHYBA
 }

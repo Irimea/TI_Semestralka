@@ -23,9 +23,8 @@ public class Prani_s_predpirkou {
     
     static Scanner sc = new Scanner(System.in);
 
-    public static void main (String[] args) {
-        vypis = "Vitejte v pračce." + "\n"
-                + "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
+    public static void start () {
+        vypis =  "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
                 + "Signály prichazi v nasledujicim poradi:" + "\n"
                 + "S (start)" + "\n"
                 + "Z (zavreni dveri)" + "\n"
@@ -93,7 +92,6 @@ public class Prani_s_predpirkou {
             	System.out.println("Zapnuti topne spiraly.");
             	stav = STAV.OHRIVANI_VODY;
             }else {
-            	// ZACNU TOCIT MOTOREM NA JEDNU STRANU
                 stav = STAV.MEZI_TOCENIM1;
                 // spustim casovac
                 casovac = true;
@@ -107,7 +105,6 @@ public class Prani_s_predpirkou {
         if (PU_teplota == true) {
         	PU_teplota = false;
             System.out.println("Vypnuti topne spiraly.");
-            // ZACNU TOCIT MOTOREM NA JEDNU STRANU
             stav = STAV.MEZI_TOCENIM1;
             // spustim casovac
             casovac = true;
@@ -294,14 +291,11 @@ public class Prani_s_predpirkou {
                
 
                 default: {
-                    //vypis = "Neplatne zadani.";
                     System.out.println("Neplatne zadani.");
                 }
             }
         }
     }
-
-    // TODO: KDYKOLIV UZIVATEL MUZE PRERUSIT PRACI CYKLUS (AT UZ TLACITKEM START NEBO OTEVRENIM DVERI)
 
     /**
      * metoda pro vypis

@@ -7,7 +7,8 @@ public class Odstredovani {
     public static String vypis;
     public static boolean zavrene_dvere = false;
     public static boolean PU_start = false;
-    public static STAV stav = STAV.IDLE;
+    public static STAV stav = STAV.START;
+//    public static STAV stav = STAV.IDLE;
     public static boolean casovac = false;
     public static boolean PU_cas = false;
     public static boolean PU_hladina = false;
@@ -15,29 +16,28 @@ public class Odstredovani {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static void main (String[] args) {
-        vypis = "Vitejte v pračce." + "\n"
-                + "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
+    public static void start () {
+        vypis = "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
                 + "Signály prichazi v nasledujicim poradi:" + "\n"
                 + "S (start)" + "\n"
                 + "Z (zavreni dveri)" + "\n"
                 + "V (casovac dosahl pozadovane hodnoty - 4x po sobe)" + "\n"
                 + "L (hladina klesla na pozadovane minimum)" + "\n"
-                + "Jsme v ";
+                + "Jsem v ";
         vypisStav(vypis);
         vypis = "Jsem v ";
 
         while (true) {
             String input = vratInput(sc);
             zjistiAkci(input);
-            stavovy_automat();
+            stavovyAutomat();
             vypisStav(vypis);
         }
     }
 
-    public static void stavovy_automat () {
+    public static void stavovyAutomat() {
         switch (stav){
-            case IDLE:                      {stav_0();break;}
+//            case IDLE:                      {stav_0();break;}
             case START:                     {stav_1();break;}
             case MEZI_TOCENIM1:             {stav_2();break;}
             case MEZI_TOCENIM2:             {stav_3();break;}
@@ -49,14 +49,15 @@ public class Odstredovani {
         }
     }
 
-    public static void stav_0 (){
-        if (PU_start == true) {
-            PU_start = false;
-            stav = STAV.START;
-        }
-        PU_hladina = false;
-        PU_cas = false;
-    }
+//    public static void stav_0 (){
+//        if (PU_start == true) {
+//            PU_start = false;
+//            stav = STAV.START;
+//        }
+//        // osetreni neocekavanych vstupu
+//        PU_hladina = false;
+//        PU_cas = false;
+//    }
 
     /**
      * zde menim stavy a zaroven provadim akce
@@ -73,9 +74,7 @@ public class Odstredovani {
             System.out.println("Spoustim casovac.");
             System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
         }
-        // preventivne nastavim priznak startu na false, protoze kdyz by honekdo behem teto casti cyklu zmackl
-        // zustalo by to tam zavazet a az budu tento priznak opravu potrebovat, mohl by byt nastaven jinak, nez
-        // by mel byt (diky tomuto stisknuti tlacitka)
+
         PU_start = false;
         PU_hladina = false;
         PU_cas = false;
@@ -83,12 +82,12 @@ public class Odstredovani {
 
     public static void stav_2 (){
         if (PU_cas == true){
-            System.out.println("Casovac PRY dosahl pozadovane hodnoty. Zastavim toceni motoru.");
+            System.out.println("Zastavim toceni motoru.");
             stav = STAV.MEZI_TOCENIM2;
             System.out.println("Zacinam tocit mototrem proti smeru hodinovych rucicek");
             PU_cas = false;
             citac -=1;
-//            PU_start = false;
+            PU_start = false;
         }
     }
 
@@ -101,7 +100,7 @@ public class Odstredovani {
                 System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
                 PU_cas = false;
                 citac -= 1;
-                //            PU_start = false;
+                PU_start = false;
             } else {
             	// treti cyklus zdimani za nami -> prechod na vypousteni
                 stav = STAV.VYPOUSTENI_VODY;
@@ -189,14 +188,12 @@ public class Odstredovani {
                 }
 
                 default: {
-                    //vypis = "Neplatne zadani.";
                     System.out.println("Neplatne zadani.");
                 }
             }
         }
     }
 
-    // TODO: KDYKOLIV UZIVATEL MUZE PRERUSIT PRACI CYKLUS (AT UZ TLACITKEM START NEBO OTEVRENIM DVERI)
 
     /**
      * metoda pro vypis

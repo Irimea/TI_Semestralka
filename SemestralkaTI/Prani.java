@@ -18,13 +18,11 @@ public class Prani {
     public static boolean PU_druhy_cyklus = false;
     public static boolean prvni_cyklus = true;
     public static boolean druhy_cyklus = false;
-    public static boolean PU_treti_cyklus = false;
     
     static Scanner sc = new Scanner(System.in);
 
-    public static void main (String[] args) {
-        vypis = "Vitejte v pračce." + "\n"
-                + "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
+    public static void start () {
+        vypis =  "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
                 + "Signály prichazi v nasledujicim poradi:" + "\n"
                 + "S (start)" + "\n"
                 + "Z (zavreni dveri)" + "\n"
@@ -34,19 +32,19 @@ public class Prani {
                 + "L (hladina klesla na pozadovane minimum)" + "\n"
                 + "P (dokoncujeme prvni cyklus)" + "\n"
                 + "D (dokoncujeme druhy cyklus)" + "\n"
-        		+ "Jsme v ";
+        		+ "Jsem v ";
         vypisStav(vypis);
         vypis = "Jsem v ";
 
         while (true) {
             String input = vratInput(sc);
             zjistiAkci(input);
-            stavovy_automat();
+            stavovyAutomat();
             vypisStav(vypis);
         }
     }
 
-    public static void stavovy_automat () {
+    public static void stavovyAutomat() {
         switch (stav){
             case IDLE:                      {stav_0();break;}
             case START:                     {stav_1();break;}
@@ -92,7 +90,6 @@ public class Prani {
             	System.out.println("Zapnuti topne spiraly.");
             	stav = STAV.OHRIVANI_VODY;
             }else {
-            	// ZACNU TOCIT MOTOREM NA JEDNU STRANU
                 stav = STAV.MEZI_TOCENIM1;
                 // spustim casovac
                 casovac = true;
@@ -106,7 +103,6 @@ public class Prani {
         if (PU_teplota == true) {
         	PU_teplota = false;
             System.out.println("Vypnuti topne spiraly.");
-            // ZACNU TOCIT MOTOREM NA JEDNU STRANU
             stav = STAV.MEZI_TOCENIM1;
             // spustim casovac
             casovac = true;
@@ -134,7 +130,7 @@ public class Prani {
                 System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
                 PU_cas = false;
                 citac -= 1;
-                //            PU_start = false;
+                PU_start = false;
             } else {
                 // treti cyklus zdimani za nami -> prechod na vypousteni
                 stav = STAV.VYPOUSTENI_VODY;
@@ -174,7 +170,6 @@ public class Prani {
             PU_hladina_min = false;
         	PU_druhy_cyklus = false;
         	druhy_cyklus = false;
-        	// ZACNU TOCIT MOTOREM NA JEDNU STRANU
             stav = STAV.MEZI_TOCENIM1;
             // spustim casovac
             casovac = true;
@@ -288,14 +283,11 @@ public class Prani {
                
 
                 default: {
-                    //vypis = "Neplatne zadani.";
                     System.out.println("Neplatne zadani.");
                 }
             }
         }
     }
-
-    // TODO: KDYKOLIV UZIVATEL MUZE PRERUSIT PRACI CYKLUS (AT UZ TLACITKEM START NEBO OTEVRENIM DVERI)
 
     /**
      * metoda pro vypis

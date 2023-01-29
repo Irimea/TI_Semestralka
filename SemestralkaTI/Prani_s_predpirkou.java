@@ -9,6 +9,7 @@ public class Prani_s_predpirkou {
     public static boolean PU_start = false;
     public static boolean PU_hladina_max = false;
     public static boolean PU_teplota = false;
+    public static boolean hotovo = false;
     public static STAV stav = STAV.IDLE;
     public static boolean casovac = false;
     public static boolean PU_cas = false;
@@ -24,17 +25,18 @@ public class Prani_s_predpirkou {
     static Scanner sc = new Scanner(System.in);
 
     public static void start () {
-        vypis =  "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
-                + "Signály prichazi v nasledujicim poradi:" + "\n"
-                + "S (start)" + "\n"
-                + "Z (zavreni dveri)" + "\n"
-                + "H (hladina stoupla na pozadovane maximum)" + "\n"
-                + "C (teplota stoupla na pozadovanou hodnotu)" + "\n"
-                + "V (casovac dosahl pozadovane hodnoty - 4x po sobe)" + "\n"
-                + "L (hladina klesla na pozadovane minimum)" + "\n"
-                + "P (dokoncujeme prvni nebo druhy cyklus)" + "\n"
-                + "D (dokoncujeme treti cyklus)" + "\n"
-        		+ "Jsme v ";
+        vypis = """
+                Manual: Pro vstup signalu od cidel pouzijte klavesnici.
+                Signály prichazi v nasledujicim poradi:
+                S (start)
+                Z (zavreni dveri)
+                H (hladina stoupla na pozadovane maximum)
+                C (teplota stoupla na pozadovanou hodnotu)
+                V (casovac dosahl pozadovane hodnoty - 4x po sobe)
+                L (hladina klesla na pozadovane minimum)
+                P (dokoncujeme prvni nebo druhy cyklus)
+                D (dokoncujeme treti cyklus)
+                Jsme v\s""";
         vypisStav(vypis);
         vypis = "Jsem v ";
 
@@ -42,6 +44,10 @@ public class Prani_s_predpirkou {
             String input = vratInput(sc);
             zjistiAkci(input);
             stavovy_automat();
+            if (hotovo == true) {
+                System.out.println ("Program skoncil uspesne.");
+                VolbaProgramu.uvitani();
+            }
             vypisStav(vypis);
         }
     }
@@ -181,6 +187,7 @@ public class Prani_s_predpirkou {
             System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
         }else if (prvni_druhy_cyklus == false && treti_cyklus == false){
             System.out.println("Konec prani.");
+            hotovo = true;
             stav = STAV.IDLE;
         }
     

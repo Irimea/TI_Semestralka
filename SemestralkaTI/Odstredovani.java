@@ -17,13 +17,14 @@ public class Odstredovani {
     static Scanner sc = new Scanner(System.in);
 
     public static void start () {
-        vypis = "Manual: Pro vstup signalu od cidel pouzijte klavesnici."  + "\n"
-                + "Signály prichazi v nasledujicim poradi:" + "\n"
-                + "S (start)" + "\n"
-                + "Z (zavreni dveri)" + "\n"
-                + "V (casovac dosahl pozadovane hodnoty - 4x po sobe)" + "\n"
-                + "L (hladina klesla na pozadovane minimum)" + "\n"
-                + "Jsem v ";
+        vypis = """
+                Manual: Pro vstup signalu od cidel pouzijte klavesnici.
+                Signály prichazi v nasledujicim poradi:
+                S (start)
+                Z (zavreni dveri)
+                V (casovac dosahl pozadovane hodnoty - 4x po sobe)
+                L (hladina klesla na pozadovane minimum)
+                Jsem v\s""";
         vypisStav(vypis);
         vypis = "Jsem v ";
 
@@ -31,6 +32,10 @@ public class Odstredovani {
             String input = vratInput(sc);
             zjistiAkci(input);
             stavovyAutomat();
+            if (hotovo == true) {
+                System.out.println ("Program skoncil uspesne.");
+                VolbaProgramu.uvitani();
+            }
             vypisStav(vypis);
         }
     }

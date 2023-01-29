@@ -26,7 +26,7 @@ public class VolbaProgramu {
                 } else if (program == 3) {
                     Prani_s_predpirkou.start();
                 } else if (program == 0) {
-                    System.out.println("Progam bude ukoncen.");
+                    System.out.println("Program bude ukoncen.");
                     System.exit(0);
                 } else {
                     System.out.println("Zvolili jste neplatny program!");

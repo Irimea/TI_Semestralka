@@ -7,8 +7,8 @@ public class Odstredovani {
     public static String vypis;
     public static boolean zavrene_dvere = false;
     public static boolean PU_start = false;
-    public static STAV stav = STAV.START;
-//    public static STAV stav = STAV.IDLE;
+    public static boolean hotovo = false;
+    public static STAV stav = STAV.IDLE;
     public static boolean casovac = false;
     public static boolean PU_cas = false;
     public static boolean PU_hladina = false;
@@ -37,7 +37,7 @@ public class Odstredovani {
 
     public static void stavovyAutomat() {
         switch (stav){
-//            case IDLE:                      {stav_0();break;}
+            case IDLE:                      {stav_0();break;}
             case START:                     {stav_1();break;}
             case MEZI_TOCENIM1:             {stav_2();break;}
             case MEZI_TOCENIM2:             {stav_3();break;}
@@ -49,15 +49,18 @@ public class Odstredovani {
         }
     }
 
-//    public static void stav_0 (){
-//        if (PU_start == true) {
-//            PU_start = false;
-//            stav = STAV.START;
-//        }
-//        // osetreni neocekavanych vstupu
-//        PU_hladina = false;
-//        PU_cas = false;
-//    }
+    public static void stav_0 (){
+        if (hotovo == true) {
+            VolbaProgramu.uvitani();
+        }
+        if (PU_start == true) {
+            PU_start = false;
+            stav = STAV.START;
+        }
+        // osetreni neocekavanych vstupu
+        PU_hladina = false;
+        PU_cas = false;
+    }
 
     /**
      * zde menim stavy a zaroven provadim akce
@@ -127,6 +130,7 @@ public class Odstredovani {
         System.out.println ("Vypinam cerpadlo.");
         System.out.println ("Zaviram vypousteci ventil.");
         PU_hladina = false;
+        hotovo = true;
         stav = STAV.IDLE;
         PU_start = false;
         PU_cas = false;

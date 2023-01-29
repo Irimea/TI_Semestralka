@@ -121,7 +121,7 @@ public class Prani_s_predpirkou {
 
     public static void stav_4 (){
         if (PU_cas == true){
-            System.out.println("Casovac PRY dosahl pozadovane hodnoty. Zastavim toceni motoru.");
+            System.out.println("Zastavim toceni motoru.");
             stav = STAV.MEZI_TOCENIM2;
             System.out.println("Zacinam tocit mototrem proti smeru hodinovych rucicek");
             PU_cas = false;
@@ -138,7 +138,7 @@ public class Prani_s_predpirkou {
                 System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
                 PU_cas = false;
                 citac -= 1;
-                //            PU_start = false;
+                PU_start = false;
             } else {
                 // treti cyklus zdimani za nami -> prechod na vypousteni
                 stav = STAV.VYPOUSTENI_VODY;

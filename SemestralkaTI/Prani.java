@@ -43,6 +43,7 @@ public class Prani {
             zjistiAkci(input);
             stavovyAutomat();
             if (hotovo == true) {
+                hotovo = false;
                 System.out.println ("Program skoncil uspesne.");
                 VolbaProgramu.uvitani();
             }

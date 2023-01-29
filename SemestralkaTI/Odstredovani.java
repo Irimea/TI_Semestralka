@@ -33,6 +33,7 @@ public class Odstredovani {
             zjistiAkci(input);
             stavovyAutomat();
             if (hotovo == true) {
+                hotovo = false;
                 System.out.println ("Program skoncil uspesne.");
                 VolbaProgramu.uvitani();
             }
@@ -55,9 +56,6 @@ public class Odstredovani {
     }
 
     public static void stav_0 (){
-        if (hotovo == true) {
-            VolbaProgramu.uvitani();
-        }
         if (PU_start == true) {
             PU_start = false;
             stav = STAV.START;

@@ -186,6 +186,7 @@ public class Prani_s_predpirkou {
             System.out.println("Spoustim casovac.");
             System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
         }else if (prvni_druhy_cyklus == false && treti_cyklus == false){
+        	System.out.println("Konec ctvrteho cyklu.");
             System.out.println("Konec prani.");
             hotovo = true;
             stav = STAV.IDLE;
@@ -270,7 +271,7 @@ public class Prani_s_predpirkou {
                     break;
                 }
                 
-                // jedna se o konec prvniho cyklu
+                // jedna se o konec prvniho nebo druheho cyklu
                 case 'P': {
                 	if(stav != STAV.PRED_DALSIM_CYKLEM || !prvni_druhy_cyklus && treti_cyklus) {
                 		System.out.println("Tento prikaz nelze momentalne pouzit");
@@ -285,7 +286,7 @@ public class Prani_s_predpirkou {
                     break;
                 }
                 
-                // jedna se o konec druheho cyklu
+                // jedna se o konec tretiho cyklu
                 case 'D': {
                 	if(stav != STAV.PRED_DALSIM_CYKLEM || !treti_cyklus){
                 		System.out.println("Tento prikaz nelze momentalne pouzit");

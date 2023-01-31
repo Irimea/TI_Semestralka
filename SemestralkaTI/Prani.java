@@ -183,6 +183,7 @@ public class Prani {
             System.out.println("Spoustim casovac.");
             System.out.println("Zacinam tocit motorem po smeru hodinovych rucicek.");
         }else if (prvni_cyklus == false && druhy_cyklus == false){
+        	System.out.println("Konec tretiho cyklu.");
         	System.out.println("Konec prani.");
             hotovo = true;
             stav = STAV.IDLE;
